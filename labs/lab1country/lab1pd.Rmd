@@ -1,0 +1,50 @@
+---
+title: "Laboratorio 1"
+output: html_notebook
+---
+```{r}
+library(tidyr)
+library(dplyr)
+```
+
+```{r}
+data <- read.csv("economic_data.csv", 
+                 header = TRUE, 
+                 sep = ";", 
+                 stringsAsFactors = FALSE)
+
+data$X2019 <- as.numeric(data$X2019)
+data
+```
+
+
+```{r}
+str(data)
+```
+
+```{r}
+country.data <- data %>%
+  select(-c(Units, Scale)) %>%
+  spread(key = Subject.Descriptor, value = X2019)
+
+str(country.data)
+```
+
+```{r}
+# Guardar el archivo modificado
+write.csv(country.data, file = "country-data.csv")
+```
+
+```{r}
+# Renombrar las variables
+colnames(country.data) <- c("Country", "GDP", "AverageInflation", "EndOfPeriodInflation", "Population", 
+                            "UnemploymentRate", "Exports", "Imports ")
+
+str(country.data)
+```
+
+```{r}
+# Guardar el archivo modificado
+write.csv(country.data, file = "country-data-formatted.csv")
+```
+

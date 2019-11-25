@@ -1,0 +1,119 @@
+library(shiny)
+library(shinyalert)
+library(DT)
+
+# Consultamos los datos mínimos y máximos en la tabla
+cvalues <- getQuery("select max(consumption_eur) as max_eur, max(consumption_sib) as max_sib, 
+              max(price_eur) as max_price_eur, max(price_sib) as max_price_sib, 
+              min(consumption_eur) as min_eur, min(consumption_sib) as min_sib, 
+              min(price_eur) as min_price_eur, min(price_sib) as min_price_sib,
+              min(timestep) as min_timestep, max(timestep) as max_timestep
+              FROM consumption limit 1")
+
+# Define UI for MySQL app
+shinyUI(fluidPage(
+
+    # Application title
+    titlePanel("Energy consumption with MySQL"),
+    
+    # Información del autor
+    h4("Product Development - Laboratorio 2"),
+    h4("Rodrigo Chang - 19000625"), 
+
+    # Creación del tabset
+    tabsetPanel(
+        # Pestaña de consultas
+        # -------------------------------------------------------------------------------------
+        tabPanel("Query & Update & Delete",
+                 
+                 # Sección de query y filtrado
+                 # --------------------------------------
+                 h4("Query data"),
+                 sidebarLayout(sidebarPanel(
+                     dateRangeInput("TimestepRange", 
+                                    "Timestep range",
+                                    start = cvalues$min_timestep, 
+                                    end = cvalues$max_timestep),
+                     sliderInput("ConsumptionEUR",
+                                 "Consumption EUR",
+                                 min = cvalues$min_eur,
+                                 max = cvalues$max_eur, 
+                                 value = c(cvalues$min_eur, cvalues$max_eur)),
+                     sliderInput("ConsumptionSIB",
+                                 "Consumption SIB",
+                                 min = cvalues$min_sib,
+                                 max = cvalues$max_sib, 
+                                 value = c(cvalues$min_sib, cvalues$max_sib)),
+                     sliderInput("PriceEUR",
+                                 "Price EUR",
+                                 min = cvalues$min_price_eur,
+                                 max = cvalues$max_price_eur, 
+                                 value = c(cvalues$min_price_eur, cvalues$max_price_eur)),
+                     sliderInput("PriceSIB",
+                                 "Price SIB",
+                                 min = cvalues$min_price_sib,
+                                 max = cvalues$max_price_sib, 
+                                 value = c(cvalues$min_price_sib, cvalues$max_price_sib))
+                 ),
+                 mainPanel(
+                     DT::dataTableOutput("consumptionData")
+                 )),
+                 
+                 # Sección de update
+                 # --------------------------------------
+                 hr(),
+                 h4("Update selected row"),
+                 textInput("updTimestep", 
+                           "Timestep row to update"),
+                 numericInput("updConsumptionEUR", 
+                              "New Consumption EUR", value = 0),
+                 numericInput("updConsumptionSIB", 
+                              "New Consumption SIB", value = 0),
+                 numericInput("updPriceEUR", 
+                              "New Price EUR", value = 0),
+                 numericInput("updPriceSIB", 
+                              "New Price SIB", value = 0),
+                 actionButton("updateButton", "Update selected row"),
+                 textOutput("updateOutput"),
+                 
+                 # Sección de delete
+                 # --------------------------------------
+                 hr(),
+                 h4("Delete selected row"),
+                 textInput("delTimestep", 
+                           "Timestep row to delete"),
+                 actionButton("deleteButton", "Delete selected row"),
+                 textOutput("deleteOutput")
+        ),
+        
+        # Pestaña para hacer inserción de datos
+        # -------------------------------------------------------------------------------------
+        tabPanel("Insert", 
+                 mainPanel(
+                     h4("Insert at current datetime"),
+                     # dateInput
+                     # dateInput("DateInput", "Date and time"),
+                     # Slider con fecha y hora
+                     # sliderInput("slider_datetime", "Date & Time:", 
+                     #             min=as.POSIXlt("2010-01-01 00:00:00", "GMT"),
+                     #             max=as.POSIXlt("2020-01-01 23:59:59", "GMT"),
+                     #             value=as.POSIXlt("2010-01-01 00:00:00", "GMT"),
+                     #             timezone = "GMT")
+                     numericInput("ConsumptionEURIn", 
+                                  "Consumption EUR", 
+                                  value = 0),
+                     numericInput("ConsumptionSIBIn", 
+                                  "Consumption SIB", 
+                                  value = 0),
+                     numericInput("PriceEURIn", 
+                                  "Price EUR", 
+                                  value = 0),
+                     numericInput("PriceSIBIn", 
+                                  "Price SIB", 
+                                  value = 0),
+                     actionButton("insertButton", "Add new entry to DB"),
+                     verbatimTextOutput("insertOutput")
+                 )
+         )
+    )
+))
