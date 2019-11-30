@@ -1,0 +1,9 @@
+]0;/home/rrcp/Documentos/Galileo/ProductDevelopment/dt_demo_2019/dt_demo(base) ]0;rrcp@rchng-5423: ~/Documentos/Galileo/ProductDevelopment/dt_demo_2019/dt_demo[01;32mrrcp@rchng-5423[00m:[01;34m~/Documentos/Galileo/ProductDevelopment/dt_demo_2019/dt_demo[00m$ cd ..
+]0;/home/rrcp/Documentos/Galileo/ProductDevelopment/dt_demo_2019(base) ]0;rrcp@rchng-5423: ~/Documentos/Galileo/ProductDevelopment/dt_demo_2019[01;32mrrcp@rchng-5423[00m:[01;34m~/Documentos/Galileo/ProductDevelopment/dt_demo_2019[00m$ cd ..
+]0;/home/rrcp/Documentos/Galileo/ProductDevelopment(base) ]0;rrcp@rchng-5423: ~/Documentos/Galileo/ProductDevelopment[01;32mrrcp@rchng-5423[00m:[01;34m~/Documentos/Galileo/ProductDevelopment[00m$ s[Kls
+aws-ec2-1610.pem  [0m[01;34mejemplo-docker[0m  [01;31mLab1.zip[0m  [01;31mLab2.zip[0m             [01;34mreactivity[0m
+[01;34mdt_demo_2019[0m      [01;34mLab1[0m            [01;34mLab2[0m      rds-credentials.txt
+]0;/home/rrcp/Documentos/Galileo/ProductDevelopment(base) ]0;rrcp@rchng-5423: ~/Documentos/Galileo/ProductDevelopment[01;32mrrcp@rchng-5423[00m:[01;34m~/Documentos/Galileo/ProductDevelopment[00m$ git clone [K[K[K[K[K[K[K[K[K[Kls
+aws-ec2-1610.pem  [0m[01;34mejemplo-docker[0m  [01;31mLab1.zip[0m  [01;31mLab2.zip[0m            rds-credentials.txt
+[01;34mdt_demo_2019[0m      [01;34mLab1[0m            [01;34mLab2[0m      [01;34mProductDevelopment[0m  [01;34mreactivity[0m
+]0;/home/rrcp/Documentos/Galileo/ProductDevelopment(base) ]0;rrcp@rchng-5423: ~/Documentos/Galileo/ProductDevelopment[01;32mrrcp@rchng-5423[00m:[01;34m~/Documentos/Galileo/ProductDevelopment[00m$ cp 
