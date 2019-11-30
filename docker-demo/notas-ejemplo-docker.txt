@@ -1,0 +1,43 @@
+Utilizar docker para servir nuestro endpoint en un servidor
+
+Crear un shiny app y lo vamos a poner en un container para servir en EC2
+
+Host: ec2-54-147-59-163.compute-1.amazonaws.com
+Password: *.pem file
+
+# Para conectarse a la instancia
+ssh -i "docker-tutorial.pem" ec2-user@ec2-54-147-59-163.compute-1.amazonaws.com
+
+
+# Para revisar los containers que están corriendo
+sudo docker ps
+
+# Mostrar todasa las imágenes, aún las que no están corriendo
+sudo docker images ls
+
+# Para construir el container
+sudo docker build -t plumber_test .
+
+# Para detener el container
+sudo docker stop <nombre_container>
+
+# Para correr un docker
+sudo docker run -d --rm -p 8888:8888 plumber_test
+
+
+# Para consultar el docker corriendo desde fuera
+curl "http://ec2-54-147-59-163.compute-1.amazonaws.com:8888/echo"
+
+# Siempre al crear un api dentro de un container se deben instalar todas las librerías y dependencias del script
+
+# URL del shiny app montado en el shiny server
+http://ec2-54-147-59-163.compute-1.amazonaws.com:3838
+
+
+TAREAS
+
+Corregir el problema de codificación en el shinyapp montada en el docker, monta la aplicación pero se cierra la conexión por alguna razón.
+
+Montar en un EC2 las predicciones de la última clase (titanic predictions) y en otro container montar un shiny app de los otros de las tareas
+
+Montar una base de datos en el RDS y tratar de conectarse dentro del docker a una base de datos remota. Mostrando la información desde un shiny app.
