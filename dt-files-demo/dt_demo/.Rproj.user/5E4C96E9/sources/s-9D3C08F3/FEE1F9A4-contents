@@ -1,4 +1,0 @@
-
-
-data <- read.csv("data.csv", header = TRUE, sep = ",", stringsAsFactors = FALSE)
-head(data)
