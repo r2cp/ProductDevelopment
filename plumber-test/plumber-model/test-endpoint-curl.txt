@@ -53,3 +53,6 @@ curl -d 'jsonfile=[{"a":4, "b":5}, {"a":1, "b":2}]' -X POST http://ec2-3-86-153-
   {"obj":[{"a":4,"b":5},{"a":1,"b":2}],"class":["data.frame"]}
   
   {"obj":[{"a":4,"b":5},{"a":1,"b":2}],"class":["data.frame"],"result":[5]}
+  
+  
+# TAREA: agregar validación de minúsculas/mayúsculas a las entradas y validación de clases en las variables sex y embarked. Si la clase no es correcta, que muestre un error. Subir la tarea como un enlace con un ejemplo precargado.
