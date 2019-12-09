@@ -1,0 +1,55 @@
+# Para probar el endpoint con curl  
+curl -v -d a=1 -d b=2 -X POST http://ec2-3-86-153-170.compute-1.amazonaws.com:8001/sum
+curl -d "a=1&b=2" -X POST http://ec2-3-86-153-170.compute-1.amazonaws.com:8001/sum
+
+PassengerId,Pclass,Name,Sex,Age,SibSp,Parch,Ticket,Fare,Cabin,Embarked
+892,3,"Kelly, Mr. James",male,34.5,0,0,330911,7.8292,,Q
+
+# Para probar el deployment del modelo con curl
+-- curl -d "Pclass=3&Sex=male&Age=34.5&SibSp=0&Parch=0&Fare=7.8292&Embarked=Q" -v -X POST http://ec2-3-86-153-170.compute-1.amazonaws.com:8001/titanic
+-- curl -d "Pclass=3&Sex=female&Age=34.5&SibSp=0&Parch=0&Fare=7.8292&Embarked=Q" -X POST http://ec2-3-86-153-170.compute-1.amazonaws.com:8001/titanic
+
+
+Note: Unnecessary use of -X or --request, POST is already inferred.
+*   Trying 3.86.153.170...
+* TCP_NODELAY set
+* Connected to ec2-3-86-153-170.compute-1.amazonaws.com (3.86.153.170) port 8001 (#0)
+> POST /titanic HTTP/1.1
+> Host: ec2-3-86-153-170.compute-1.amazonaws.com:8001
+> User-Agent: curl/7.58.0
+> Accept: */*
+> Content-Length: 65
+> Content-Type: application/x-www-form-urlencoded
+> 
+* upload completely sent off: 65 out of 65 bytes
+< HTTP/1.1 200 OK
+< Date: Mon, 09 Dec 2019 03:39:38 GMT
+< Content-Type: application/json
+< Date: Mon, 09 Dec 2019 03:39:38 GMT
+< Connection: close
+< Content-Length: 5
+< 
+* Closing connection 0
+
+["0"]
+
+
+
+# Prueba del archivo JSON por POST
+
+# Si se envía de esta forma, devuelve una lista
+curl -d 'jsonfile={"a":4, "b":5}' -X POST http://ec2-3-86-153-170.compute-1.amazonaws.com:8001/jsonproc
+
+  {"obj":{"a":[4],"b":[5]},"class":["list"]}
+  
+# Si se envía de esta forma, devuelve un data.frame
+curl -d 'jsonfile=[{"a":4, "b":5}]' -X POST http://ec2-3-86-153-170.compute-1.amazonaws.com:8001/jsonproc
+
+  {"obj":[{"a":4,"b":5}],"class":["data.frame"]}
+  
+# Prueba con varias líneas de JSON
+curl -d 'jsonfile=[{"a":4, "b":5}, {"a":1, "b":2}]' -X POST http://ec2-3-86-153-170.compute-1.amazonaws.com:8001/jsonproc
+
+  {"obj":[{"a":4,"b":5},{"a":1,"b":2}],"class":["data.frame"]}
+  
+  {"obj":[{"a":4,"b":5},{"a":1,"b":2}],"class":["data.frame"],"result":[5]}
