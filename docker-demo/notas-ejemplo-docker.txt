@@ -13,9 +13,10 @@ ssh -i "docker-tutorial.pem" ec2-user@ec2-54-147-59-163.compute-1.amazonaws.com
 sudo docker ps
 
 # Mostrar todasa las imágenes, aún las que no están corriendo
-sudo docker images ls
+sudo docker image ls
 
 # Para construir el container
+sudo docker build -t <docker-repository-name> .
 sudo docker build -t plumber_test .
 
 # Para detener el container
@@ -36,8 +37,8 @@ http://ec2-54-147-59-163.compute-1.amazonaws.com:3838
 
 TAREAS
 
-Corregir el problema de codificación en el shinyapp montada en el docker, monta la aplicación pero se cierra la conexión por alguna razón.
+Corregir el problema de codificación en el shinyapp montada en el docker. Se monta la aplicación pero se cierra la conexión por alguna razón.
 
-Montar en un EC2 las predicciones de la última clase (titanic predictions) y en otro container montar un shiny app de los otros de las tareas
+Montar en un EC2 las predicciones de la última clase (titanic predictions) y en otro container montar un shiny app de los otros de las tareas.
 
 Montar una base de datos en el RDS y tratar de conectarse dentro del docker a una base de datos remota. Mostrando la información desde un shiny app.
