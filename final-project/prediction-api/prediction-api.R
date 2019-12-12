@@ -18,13 +18,17 @@ tree.model <- readRDS("tree-model.rds")
 function(jsondata, modelno) {
   # Get the data as a dataframe 
   data <- fromJSON(jsondata)
+  print("JSON data received from file")
   
   # Generar una salida de acuerdo con el modelo enviado
   if (modelno == "1") {
     prediction <- predict(svr.model, data)
+    print("Prediction made from SVR model")
   } else if (modelno == "2") {
     prediction <- predict(tree.model, data)
+    print("Prediction made from tree model")
   } else {
+    print("Incorrect model specified")
     prediction <- NA
   }
   
