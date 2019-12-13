@@ -12,7 +12,9 @@ jsontrain <- toJSON(head(train))
 # Dirección: ec2-54-147-59-163.compute-1.amazonaws.com:8888/predict
 url <- "ec2-54-147-59-163.compute-1.amazonaws.com:8888/predict"
 response <- POST(url, 
-                 body = list(jsondata = jsontrain, modelno = "1"), 
+                 body = list(jsondata = jsontrain, 
+                             model = "svr", 
+                             user = "mrrobot"), 
                  encode = "json")
 
 # Obtener la respuesta del modelo como una lista
