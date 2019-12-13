@@ -21,9 +21,9 @@ BUCKET_NAME <- Sys.getenv("API_BUCKET_NAME")
 #* Log some information about the incoming request
 #* @filter logger
 function(req){
-  cat(as.character(Sys.time()), "-", 
-      req$REQUEST_METHOD, req$PATH_INFO, "-", 
-      req$HTTP_USER_AGENT, "@", req$REMOTE_ADDR, "\n")
+  # cat(as.character(Sys.time()), "-", 
+  #     req$REQUEST_METHOD, req$PATH_INFO, "-", 
+  #     req$HTTP_USER_AGENT, "@", req$REMOTE_ADDR, "\n")
   plumber::forward()
 }
 
@@ -63,17 +63,18 @@ function(jsondata, model, user, req) {
   
   ## Save the log in S3
   # Generate a filename
-  filename <- cat(substring(digest(cat(as.character(log.list$timestamp), 
-                                       req$HTTP_USER_AGENT, 
-                                       req$REMOTE_ADDR, sep = "+"), 
+  filename <- paste(Sys.Date(), "-", substring(digest(paste(as.character(log.list$timestamp),
+                                       req$HTTP_USER_AGENT,
+                                       req$REMOTE_ADDR, sep = "+"),
                                    algo = "sha1"), 1, 15), ".json", sep = "")
-  print(cat("Filename is:", filename))
+  # filename <- cat(as.character(log.list$timestamp), ".json", sep = "")
+  print(paste("Filename is:", filename))
   
   # Save the JSON file locally
   log.json <- toJSON(log.list)
   write_json(log.json, filename)
   
-  # Put the JSON file in S3 bucket
+  # Push the JSON file in S3 bucket
   put_object(file = filename, 
              object = filename, 
              bucket = BUCKET_NAME)
