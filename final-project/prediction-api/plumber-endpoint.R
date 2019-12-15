@@ -2,10 +2,10 @@
 library(plumber)
 
 # Specifying keys for the S3 as environment variables
-Sys.setenv("AWS_ACCESS_KEY_ID" = "ASIAYHETA5L64LMOCQXY",
-           "AWS_SECRET_ACCESS_KEY" = "6pE+Rc6JBzTE7i7cG0N2jEOEFvJ58J/RT99uIB5m", 
+Sys.setenv("AWS_ACCESS_KEY_ID" = "ASIAYHETA5L6QLSHB35B",
+           "AWS_SECRET_ACCESS_KEY" = "4wW06O8VCrCOOyp/5gSA4n8H5LbBXh5vlSQlJCQe", 
            "AWS_DEFAULT_REGION" = "us-east-1", 
-           "AWS_SESSION_TOKEN" = "FwoGZXIvYXdzEN3//////////wEaDKWnBlQ5FAwPxmSf/SLDAS4s06CmRuQpVgqx7IczNZ/Oro29g9nGc97Qxm/NrNQZrzWkORrUoVphrVeR89XxfUvkNDEo7r7Qz0PYtpHWNWNlHsI5O5E50uVPbB6CPswgn42aQ2E009Fq6DwdM2L/i0Skmg6tfTUnX9qBawwTen1Zy1DsyQ7xmERf2KvfsssPHjPtJwrLtVLBlyLkLrmH4Lua6mLDKmuJeiylB2G+qU8q9S1YT7xjRRgTtJKgJ7++CFr8jQhaXb1BIs2pR1D+L1XEqyjMiMzvBTItUKEIJoXFadM8ZrQFt5JR/ZINnLg3+z2E6ZlWji8msdWKH1XN3GD9ubDvSAwB"
+           "AWS_SESSION_TOKEN" = "FwoGZXIvYXdzEBgaDFqNBKxttOqSadfG9yLDAU8Hea0/iyeCjke08UFcFEKTYP7yInlEMzVBrdtHc3F0aQjpY4mpEHMAUhYzfUkqr0b92/ANYfkSg8eKGOK0Rla18PcA/FQ9F/5V6ULw7n83i1OoyfEYzhy8cvwvdiRwes47KM1RaN7GEioTsZFwjzLtV9QXtXbJH5dhBcHj67uagcPnIL9JekHlFkAq/1LmSXob9PIlZTSIih4sDH+KvYrefG+31OiQG0Gwxq0XK3vUUzuFiXhTZ4vgT8bf8HuyEqtPPSjbj9nvBTItCPEegGDeGn+/4IQ4sO31W2sKbQWCi3JrVyDfuGi5R9B0KxFG0zhNfKIAtrIa"
 )
 
 # Set the bucket name to dump the log files

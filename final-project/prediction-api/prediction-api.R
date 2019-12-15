@@ -74,13 +74,26 @@ function(jsondata, model, user, req) {
   log.json <- toJSON(log.list)
   write_json(log.json, filename)
   
-  # Push the JSON file in S3 bucket
-  put_object(file = filename, 
-             object = filename, 
-             bucket = BUCKET_NAME)
   
-  # Clean up the local log file
-  file.remove(filename)
+  # Push the JSON file in S3 bucket with credentials saved in ENV VARS
+  result <- tryCatch({
+    put_object(file = filename, 
+               object = filename, 
+               bucket = BUCKET_NAME, 
+               session_token = NULL)
+  }, warning = function(cond) {
+    print("A warning has raised. Original message: ")
+    print(cond)
+  }, error = function(cond) {
+    print("An error has ocurred. Original message: ")
+    print(cond)
+    print("# Ignoring saving log in S3")
+  }, finally = {
+    print("Processed file for S3 completed")
+    # Clean up the local log file
+    file.remove(filename)
+  })
+  
   
   # Set up the output list for prediction
   out <- list(prediction = prediction)
