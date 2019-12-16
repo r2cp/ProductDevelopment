@@ -6,14 +6,18 @@ library(httr)
 train <- read_csv("data/train.csv")
 
 # Convertir a JSON
-jsontrain <- toJSON(head(train), n=3)
+jsontrain <- toJSON(tail(train, n=20))
 
 # Consultar el API
-# Dirección: ec2-54-147-59-163.compute-1.amazonaws.com:8888/predict
+
 # Docker container instance
 # url <- "ec2-54-147-59-163.compute-1.amazonaws.com:8888/predict"
-# Rstudio instance
+# Rstudio-main instance
 # url <- "ec2-3-86-153-170.compute-1.amazonaws.com:8888/predict"
+# Rstudio-API service instance
+url <- "ec2-3-86-209-44.compute-1.amazonaws.com:8888/predict"
+
+# Get the response object
 response <- POST(url, 
                  body = list(jsondata = jsontrain, 
                              model = "svr", 
