@@ -67,13 +67,11 @@ function(jsondata, model, user, req) {
                                        req$HTTP_USER_AGENT,
                                        req$REMOTE_ADDR, sep = "+"),
                                    algo = "sha1"), 1, 15), ".json", sep = "")
-  # filename <- cat(as.character(log.list$timestamp), ".json", sep = "")
   print(paste("Filename is:", filename))
   
   # Save the JSON file locally
   log.json <- toJSON(log.list)
   write_json(log.json, filename)
-  
   
   # Push the JSON file in S3 bucket with credentials saved in ENV VARS
   result <- tryCatch({
