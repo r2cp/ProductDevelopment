@@ -1,0 +1,1 @@
+API_URL <- "ec2-3-86-209-44.compute-1.amazonaws.com:8888/predict"

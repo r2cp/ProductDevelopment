@@ -6,7 +6,7 @@ library(httr)
 train <- read_csv("data/train.csv")
 
 # Convertir a JSON
-jsontrain <- toJSON(tail(train, n=20))
+jsontrain <- toJSON(tail(train, n=1))
 
 # Consultar el API
 
